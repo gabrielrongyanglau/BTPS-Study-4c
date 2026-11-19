@@ -1,282 +1,189 @@
 {
-  "attributes": [
+  "benefits": [
     "STR",
-    "PRD",
-    "SAF",
     "ENV",
-    "LOY",
-    "PRC"
+    "LOY"
   ],
-  "objective": 288.0,
+  "priceLevels": [
+    -0.15,
+    -0.05,
+    0.05,
+    0.15
+  ],
+  "objective": 0.3,
   "sets": [
     {
       "set": 1,
       "options": [
         {
-          "STR": 1,
-          "PRD": 0,
-          "SAF": 1,
-          "ENV": 1,
-          "LOY": 0,
-          "PRC": 1
-        },
-        {
           "STR": 0,
-          "PRD": 1,
-          "SAF": 1,
           "ENV": 0,
-          "LOY": 1,
-          "PRC": 0
-        },
-        {
-          "STR": 0,
-          "PRD": 0,
-          "SAF": 0,
-          "ENV": 1,
-          "LOY": 1,
-          "PRC": 1
+          "LOY": 0,
+          "PRICE": 0
         },
         {
           "STR": 1,
-          "PRD": 1,
-          "SAF": 0,
-          "ENV": 0,
+          "ENV": 1,
           "LOY": 0,
-          "PRC": 0
+          "PRICE": 1
+        },
+        {
+          "STR": 0,
+          "ENV": 0,
+          "LOY": 1,
+          "PRICE": 2
+        },
+        {
+          "STR": 1,
+          "ENV": 1,
+          "LOY": 1,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
       "set": 2,
       "options": [
         {
-          "STR": 1,
-          "PRD": 1,
-          "SAF": 0,
+          "STR": 0,
           "ENV": 0,
-          "LOY": 1,
-          "PRC": 1
-        },
-        {
-          "STR": 1,
-          "PRD": 1,
-          "SAF": 0,
-          "ENV": 1,
           "LOY": 0,
-          "PRC": 0
+          "PRICE": 0
         },
         {
           "STR": 0,
-          "PRD": 0,
-          "SAF": 1,
           "ENV": 1,
           "LOY": 1,
-          "PRC": 0
+          "PRICE": 1
         },
         {
-          "STR": 0,
-          "PRD": 0,
-          "SAF": 1,
+          "STR": 1,
           "ENV": 0,
           "LOY": 0,
-          "PRC": 1
+          "PRICE": 2
+        },
+        {
+          "STR": 1,
+          "ENV": 1,
+          "LOY": 1,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
       "set": 3,
       "options": [
         {
-          "STR": 1,
-          "PRD": 1,
-          "SAF": 0,
+          "STR": 0,
           "ENV": 1,
           "LOY": 0,
-          "PRC": 1
-        },
-        {
-          "STR": 0,
-          "PRD": 0,
-          "SAF": 1,
-          "ENV": 0,
-          "LOY": 1,
-          "PRC": 1
+          "PRICE": 0
         },
         {
           "STR": 1,
-          "PRD": 0,
-          "SAF": 0,
           "ENV": 1,
-          "LOY": 1,
-          "PRC": 0
+          "LOY": 0,
+          "PRICE": 1
         },
         {
           "STR": 0,
-          "PRD": 1,
-          "SAF": 1,
           "ENV": 0,
-          "LOY": 0,
-          "PRC": 0
+          "LOY": 1,
+          "PRICE": 2
+        },
+        {
+          "STR": 1,
+          "ENV": 0,
+          "LOY": 1,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
       "set": 4,
       "options": [
         {
-          "STR": 1,
-          "PRD": 0,
-          "SAF": 1,
-          "ENV": 0,
-          "LOY": 1,
-          "PRC": 1
-        },
-        {
-          "STR": 1,
-          "PRD": 1,
-          "SAF": 1,
-          "ENV": 0,
+          "STR": 0,
+          "ENV": 1,
           "LOY": 0,
-          "PRC": 0
+          "PRICE": 0
         },
         {
           "STR": 0,
-          "PRD": 1,
-          "SAF": 0,
-          "ENV": 1,
-          "LOY": 0,
-          "PRC": 1
-        },
-        {
-          "STR": 0,
-          "PRD": 0,
-          "SAF": 0,
           "ENV": 1,
           "LOY": 1,
-          "PRC": 0
+          "PRICE": 1
+        },
+        {
+          "STR": 1,
+          "ENV": 0,
+          "LOY": 0,
+          "PRICE": 2
+        },
+        {
+          "STR": 1,
+          "ENV": 0,
+          "LOY": 1,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
       "set": 5,
       "options": [
         {
-          "STR": 1,
-          "PRD": 1,
-          "SAF": 1,
-          "ENV": 1,
-          "LOY": 0,
-          "PRC": 0
-        },
-        {
           "STR": 0,
-          "PRD": 1,
-          "SAF": 0,
           "ENV": 0,
           "LOY": 1,
-          "PRC": 1
+          "PRICE": 0
         },
         {
           "STR": 1,
-          "PRD": 0,
-          "SAF": 1,
           "ENV": 0,
           "LOY": 1,
-          "PRC": 0
+          "PRICE": 1
         },
         {
           "STR": 0,
-          "PRD": 0,
-          "SAF": 0,
           "ENV": 1,
           "LOY": 0,
-          "PRC": 1
+          "PRICE": 2
+        },
+        {
+          "STR": 1,
+          "ENV": 1,
+          "LOY": 0,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
       "set": 6,
       "options": [
         {
-          "STR": 0,
-          "PRD": 1,
-          "SAF": 0,
-          "ENV": 1,
-          "LOY": 1,
-          "PRC": 1
-        },
-        {
-          "STR": 0,
-          "PRD": 1,
-          "SAF": 1,
-          "ENV": 1,
+          "STR": 1,
+          "ENV": 0,
           "LOY": 0,
-          "PRC": 0
+          "PRICE": 0
         },
         {
           "STR": 1,
-          "PRD": 0,
-          "SAF": 1,
-          "ENV": 0,
+          "ENV": 1,
           "LOY": 0,
-          "PRC": 1
+          "PRICE": 1
         },
         {
-          "STR": 1,
-          "PRD": 0,
-          "SAF": 0,
+          "STR": 0,
           "ENV": 0,
           "LOY": 1,
-          "PRC": 0
+          "PRICE": 2
+        },
+        {
+          "STR": 0,
+          "ENV": 1,
+          "LOY": 1,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
@@ -284,44 +191,28 @@
       "options": [
         {
           "STR": 0,
-          "PRD": 1,
-          "SAF": 1,
           "ENV": 0,
           "LOY": 1,
-          "PRC": 1
-        },
-        {
-          "STR": 1,
-          "PRD": 1,
-          "SAF": 0,
-          "ENV": 0,
-          "LOY": 1,
-          "PRC": 0
-        },
-        {
-          "STR": 1,
-          "PRD": 0,
-          "SAF": 0,
-          "ENV": 1,
-          "LOY": 0,
-          "PRC": 1
+          "PRICE": 0
         },
         {
           "STR": 0,
-          "PRD": 0,
-          "SAF": 1,
+          "ENV": 1,
+          "LOY": 1,
+          "PRICE": 1
+        },
+        {
+          "STR": 1,
+          "ENV": 0,
+          "LOY": 0,
+          "PRICE": 2
+        },
+        {
+          "STR": 1,
           "ENV": 1,
           "LOY": 0,
-          "PRC": 0
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     },
     {
@@ -329,44 +220,28 @@
       "options": [
         {
           "STR": 1,
-          "PRD": 0,
-          "SAF": 1,
-          "ENV": 1,
-          "LOY": 1,
-          "PRC": 0
-        },
-        {
-          "STR": 0,
-          "PRD": 1,
-          "SAF": 1,
           "ENV": 0,
           "LOY": 0,
-          "PRC": 1
-        },
-        {
-          "STR": 0,
-          "PRD": 1,
-          "SAF": 0,
-          "ENV": 1,
-          "LOY": 1,
-          "PRC": 0
+          "PRICE": 0
         },
         {
           "STR": 1,
-          "PRD": 0,
-          "SAF": 0,
           "ENV": 0,
+          "LOY": 1,
+          "PRICE": 1
+        },
+        {
+          "STR": 0,
+          "ENV": 1,
           "LOY": 0,
-          "PRC": 1
+          "PRICE": 2
+        },
+        {
+          "STR": 0,
+          "ENV": 1,
+          "LOY": 1,
+          "PRICE": 3
         }
-      ],
-      "best": 0,
-      "worst": 3,
-      "goods": [
-        4,
-        3,
-        3,
-        2
       ]
     }
   ]

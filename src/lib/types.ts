@@ -1,9 +1,15 @@
-export type Attr = 'STR' | 'PRD' | 'SAF' | 'ENV' | 'LOY' | 'PRC';
-export const ATTRS: Attr[] = ['STR', 'PRD', 'SAF', 'ENV', 'LOY', 'PRC'];
+export type Benefit = 'STR' | 'ENV' | 'LOY';
+export const BENEFITS: Benefit[] = ['STR', 'ENV', 'LOY'];
 
-export type AttrLevels = Record<Attr, 0 | 1>;
+/** Reasons the AI can cite: a benefit, or a low fare (price level 0-1, within policy). */
+export type Reason = Benefit | 'FARE';
 
-export type AICondition = 'good' | 'poor' | 'none';
+export interface Levels {
+  STR: 0 | 1;
+  ENV: 0 | 1;
+  LOY: 0 | 1;
+  PRICE: 0 | 1 | 2 | 3; // 0 = cap -15%, 1 = cap -5%, 2 = cap +5%, 3 = cap +15%
+}
 
 export interface Trip {
   id: string;
@@ -11,7 +17,6 @@ export interface Trip {
   airport: string;
   country: string;
   purpose: string;
-  blurb: string; // one-line destination description (Destination Attractiveness context)
   baseDurMin: number; // direct block time
   tzOffsetH: number; // destination time minus origin time
   distanceKm: number;
@@ -22,8 +27,8 @@ export interface Trip {
 export interface Flight {
   id: string; // e.g. "B3-O2" (booking position, option index within design set)
   optIdx: number; // index within the design set (0-3)
-  attrs: AttrLevels;
-  code: string; // e.g. "101101" in ATTRS order
+  levels: Levels;
+  code: string; // STR ENV LOY PRICE, e.g. "1012"
   airline: string;
   flightNo: string;
   aircraft: string;
@@ -33,12 +38,10 @@ export interface Flight {
   stops: 0 | 1;
   via: string | null;
   layoverMin: number;
-  wifi: boolean;
-  safety: number; // out of 7
   co2: number; // kg CO2e per passenger
   co2Pct: number; // % vs typical for route (signed)
-  alliance: boolean;
-  miles: number;
+  partner: boolean; // company rewards partner airline
+  points: number; // company rewards points earned
   price: number;
   withinPolicy: boolean;
 }
@@ -50,22 +53,20 @@ export interface BookingRecord {
   practice: boolean;
   tripId: string;
   designSet: number; // 1-based design set id (0 for practice)
-  ai: AICondition;
+  aiShown: boolean;
   recId: string | null;
   recOptIdx: number | null;
-  recReasons: Attr[];
+  recReasons: Reason[];
   displayOrder: string[]; // flight ids in default display order
   options: Flight[];
   choiceId: string;
   choiceOptIdx: number;
   choiceCode: string;
+  choicePrice: number;
   followedAI: boolean | null;
   overPolicy: boolean;
   justification: string[];
   justificationText: string;
-  addons: string[];
-  addonSpend: number;
-  bleisure: boolean;
   changedFlight: number; // times participant went back from review to results
   rtMs: number; // results shown -> booking confirmed
   choiceRtMs: number; // results shown -> first flight selected
@@ -84,6 +85,6 @@ export interface SessionData {
   viewport: string;
   checkAttempts: number;
   tripOrder: string[];
-  aiPlan: AICondition[];
+  aiPlan: boolean[];
   bookings: BookingRecord[]; // includes practice at index 0
 }

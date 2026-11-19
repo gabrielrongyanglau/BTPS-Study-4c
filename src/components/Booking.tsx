@@ -2,12 +2,12 @@ import { useMemo, useRef, useState } from 'react';
 import { AI_REASON_TEXT, STUDY } from '../config';
 import { clock, money } from '../lib/format';
 import type { PlannedBooking } from '../lib/plan';
-import type { BookingRecord, Flight, LogEvent } from '../lib/types';
+import type { BookingRecord, Flight, LogEvent, Reason } from '../lib/types';
 import FlightCard from './FlightCard';
 import Review, { type ReviewResult } from './Review';
 
 type SortKey = 'default' | 'price' | 'duration' | 'departure' | 'co2';
-type FilterKey = 'direct' | 'wifi' | 'policy' | 'alliance' | 'safety';
+type FilterKey = 'direct' | 'policy' | 'partner';
 
 const SORTS: { key: SortKey; label: string }[] = [
   { key: 'default', label: 'Default' },
@@ -19,16 +19,14 @@ const SORTS: { key: SortKey; label: string }[] = [
 
 const FILTERS: { key: FilterKey; label: string; test: (f: Flight) => boolean }[] = [
   { key: 'direct', label: 'Direct only', test: (f) => f.stops === 0 },
-  { key: 'wifi', label: 'Wi-Fi', test: (f) => f.wifi },
   { key: 'policy', label: 'Within policy', test: (f) => f.withinPolicy },
-  { key: 'alliance', label: `${STUDY.allianceName} only`, test: (f) => f.alliance },
-  { key: 'safety', label: 'Top safety (7/7)', test: (f) => f.safety === 7 },
+  { key: 'partner', label: `${STUDY.rewards.name} partners`, test: (f) => f.partner },
 ];
 
 /** Departure time sorted from the start of the travel day (early hours after late evening). */
 const depSortKey = (m: number) => (m < 4 * 60 ? m + 1440 : m);
 
-export function aiMessage(flight: Flight, reasons: string[]): string {
+export function aiMessage(flight: Flight, reasons: Reason[]): string {
   const parts = reasons.map((r) => AI_REASON_TEXT[r].replace('{pct}', String(Math.abs(flight.co2Pct))));
   const because = parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}` : parts[0];
   return `I recommend ${flight.airline} ${flight.flightNo} (departs ${clock(flight.depMin)}) because ${because}.`;
@@ -114,7 +112,7 @@ export default function Booking({ planned, onComplete }: { planned: PlannedBooki
       practice: planned.practice,
       tripId: trip.id,
       designSet: planned.designSet,
-      ai: planned.ai,
+      aiShown: planned.aiShown,
       recId: rec?.id ?? null,
       recOptIdx: planned.recOptIdx,
       recReasons: planned.recReasons,
@@ -123,13 +121,11 @@ export default function Booking({ planned, onComplete }: { planned: PlannedBooki
       choiceId: choice.id,
       choiceOptIdx: choice.optIdx,
       choiceCode: choice.code,
+      choicePrice: choice.price,
       followedAI: rec ? rec.id === choice.id : null,
       overPolicy: !choice.withinPolicy,
       justification: r.justification,
       justificationText: r.justificationText,
-      addons: r.addons,
-      addonSpend: r.addonSpend,
-      bleisure: r.bleisure,
       changedFlight: changed.current,
       rtMs: elapsed(),
       choiceRtMs: firstSelect.current ?? elapsed(),
@@ -155,13 +151,12 @@ export default function Booking({ planned, onComplete }: { planned: PlannedBooki
           <p className="eyebrow">Trip brief</p>
           <h1>{STUDY.origin.city} to {trip.city}</h1>
           <p>{trip.purpose} in {trip.city}, {trip.country}.</p>
-          <p className="muted small">About {trip.city}: {trip.blurb}</p>
+          <p className="muted small">Every flight shown arrives in time for your meeting.</p>
         </div>
         <dl className="brief-facts">
           <div><dt>Outbound</dt><dd>Monday, {STUDY.origin.airport} to {trip.airport}</dd></div>
           <div><dt>Meeting</dt><dd>Wednesday, 10:00 local time</dd></div>
           <div><dt>Fare cap</dt><dd>{money(trip.fareCap)}</dd></div>
-          <div><dt>Add-on allowance</dt><dd>{money(STUDY.addonAllowance)}</dd></div>
         </dl>
       </section>
 

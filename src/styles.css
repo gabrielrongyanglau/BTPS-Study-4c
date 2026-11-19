@@ -137,19 +137,7 @@ dd { margin: 0; }
 .summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 8px 0; }
 .summary-price { text-align: right; }
 .row-between { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.allowance { background: var(--brand-soft); color: var(--brand); font-weight: 700; font-size: 0.85rem; padding: 4px 10px; border-radius: 999px; }
-.allowance-empty { background: #eef1f5; color: var(--muted); }
-.addons { display: grid; gap: 8px; margin-top: 8px; }
-.addon { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
-.addon-text { display: flex; flex-direction: column; }
-.addon-on { border-color: var(--brand); background: var(--brand-soft); }
-.addon-disabled { opacity: 0.5; cursor: not-allowed; }
-.addon-price { font-weight: 700; }
 .textarea { width: 100%; font: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 8px; margin-top: 6px; }
-.seg { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.seg-btn { border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; cursor: pointer; font-weight: 600; }
-.seg-btn input { position: absolute; opacity: 0; pointer-events: none; }
-.seg-on { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); }
 
 .done-icon { width: 54px; height: 54px; margin: 6px auto 8px; border-radius: 50%; background: var(--ok-soft); color: var(--ok); display: grid; place-items: center; font-size: 1.6rem; font-weight: 800; }
 .debug { margin-top: 18px; border-top: 1px dashed var(--line); padding-top: 12px; }

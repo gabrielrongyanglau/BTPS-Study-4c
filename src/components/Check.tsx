@@ -3,10 +3,15 @@ import { STUDY } from '../config';
 
 const QUESTIONS = [
   {
-    id: 'alliance',
-    q: 'Which frequent-flyer programme are you a member of?',
-    options: [STUDY.allianceName, 'Orbis Alliance', 'StarPath', 'None'],
-    answer: STUDY.allianceName,
+    id: 'rewards',
+    q: 'How do you earn points in your company\'s travel rewards scheme?',
+    options: [
+      'By booking the cheapest flight',
+      `By booking a ${STUDY.rewards.name} partner airline`,
+      'By booking a direct flight',
+      'By following the Trip Assistant',
+    ],
+    answer: `By booking a ${STUDY.rewards.name} partner airline`,
   },
   {
     id: 'policy',

@@ -12,11 +12,8 @@ interface Props {
   onSelect: () => void;
 }
 
-const Yes = () => <span className="yes" aria-label="yes">✓</span>;
-const No = () => <span className="no" aria-label="no">✕</span>;
-
 export default function FlightCard({ flight: f, trip, aiPick, highlighted, expanded, onToggleDetails, onSelect }: Props) {
-  const over = f.price - trip.fareCap;
+  const typicalCo2 = Math.round(trip.distanceKm * 0.078);
   return (
     <article id={`card-${f.id}`} className={`card ${highlighted ? 'card-highlight' : ''}`} aria-label={`${f.airline} ${f.flightNo}`}>
       {aiPick && <div className="ai-flag">Trip Assistant pick</div>}
@@ -26,12 +23,11 @@ export default function FlightCard({ flight: f, trip, aiPick, highlighted, expan
           <span className="muted small">{f.flightNo}</span>
         </div>
         <div className="tags">
-          {f.alliance ? (
-            <span className="badge badge-alliance">{STUDY.allianceName}</span>
+          {f.partner ? (
+            <span className="badge badge-alliance">{STUDY.rewards.name} partner</span>
           ) : (
-            <span className="badge badge-plain">Not {STUDY.allianceName}</span>
+            <span className="badge badge-plain">Not a rewards partner</span>
           )}
-          <span className={`badge ${f.safety === 7 ? 'badge-safe' : 'badge-warn'}`}>Safety {f.safety}/7</span>
         </div>
       </div>
 
@@ -62,19 +58,19 @@ export default function FlightCard({ flight: f, trip, aiPick, highlighted, expan
           {f.withinPolicy ? (
             <span className="badge badge-safe">Within policy</span>
           ) : (
-            <span className="badge badge-warn">{money(over)} above cap</span>
+            <span className="badge badge-warn">{money(f.price - trip.fareCap)} above cap</span>
           )}
           <button className="btn btn-primary btn-select" onClick={onSelect}>Select</button>
         </div>
       </div>
 
       <ul className="features">
-        <li>{f.wifi ? <Yes /> : <No />} Wi-Fi and power</li>
-        <li>{f.wifi ? <Yes /> : <No />} Work-friendly seat</li>
         <li className={f.co2Pct < 0 ? 'ok' : 'warn'}>
           {f.co2} kg CO₂e · {f.co2Pct < 0 ? '' : '+'}{f.co2Pct}% vs typical
         </li>
-        <li>{f.alliance ? `+${f.miles.toLocaleString('en-GB')} ${STUDY.allianceName} miles` : `No ${STUDY.allianceName} miles`}</li>
+        <li className={f.partner ? 'ok' : 'muted'}>
+          {f.partner ? `+${f.points.toLocaleString('en-GB')} ${STUDY.rewards.name} points` : `No ${STUDY.rewards.name} points`}
+        </li>
       </ul>
 
       <button className="link" aria-expanded={expanded} onClick={onToggleDetails}>
@@ -82,7 +78,6 @@ export default function FlightCard({ flight: f, trip, aiPick, highlighted, expan
       </button>
       {expanded && (
         <dl className="details">
-          <div><dt>Aircraft</dt><dd>{f.aircraft}{f.co2Pct < 0 ? ' (newer, fuel-efficient model)' : ' (older model)'}</dd></div>
           <div>
             <dt>Itinerary</dt>
             <dd>
@@ -91,22 +86,15 @@ export default function FlightCard({ flight: f, trip, aiPick, highlighted, expan
                 : `${STUDY.origin.airport} to ${f.via}, ${duration(f.layoverMin)} connection, then on to ${trip.airport}`}
             </dd>
           </div>
+          <div><dt>Aircraft</dt><dd>{f.aircraft}{f.co2Pct < 0 ? ' (newer, fuel-efficient model)' : ' (older model)'}</dd></div>
+          <div><dt>Emissions</dt><dd>{f.co2} kg CO₂e per passenger; typical for this route is {typicalCo2} kg.</dd></div>
           <div>
-            <dt>Safety rating</dt>
+            <dt>Rewards</dt>
             <dd>
-              {f.safety === 7
-                ? 'Independent audit 7/7: passed every safety and operational audit.'
-                : 'Independent audit 4/7: meets minimum international standards, with some audit items outstanding.'}
+              {f.partner
+                ? `${STUDY.rewards.name} partner airline: earns ${f.points.toLocaleString('en-GB')} points.`
+                : `Not a ${STUDY.rewards.name} partner: earns no points.`}
             </dd>
-          </div>
-          <div><dt>Emissions</dt><dd>{f.co2} kg CO₂e per passenger; typical for this route is {Math.round(trip.distanceKm * 0.078)} kg.</dd></div>
-          <div>
-            <dt>On board</dt>
-            <dd>{f.wifi ? 'Free Wi-Fi, in-seat power and a seat with a laptop-sized tray.' : 'No Wi-Fi or in-seat power; standard tray table.'}</dd>
-          </div>
-          <div>
-            <dt>Loyalty</dt>
-            <dd>{f.alliance ? `${STUDY.allianceName} member airline: earns miles and status credits.` : `Not a ${STUDY.allianceName} airline: earns nothing on your membership.`}</dd>
           </div>
           <div><dt>Baggage</dt><dd>1 × 23 kg checked bag and 1 cabin bag included.</dd></div>
         </dl>

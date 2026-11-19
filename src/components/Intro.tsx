@@ -1,5 +1,4 @@
 import { STUDY, TRIPS } from '../config';
-import { money } from '../lib/format';
 
 export default function Intro({ onNext }: { onNext: () => void }) {
   return (
@@ -12,24 +11,18 @@ export default function Intro({ onNext }: { onNext: () => void }) {
       </p>
 
       <div className="profile-card">
-        <h2>Your traveller profile</h2>
-        <dl>
-          <div><dt>Home airport</dt><dd>{STUDY.origin.city} ({STUDY.origin.airport})</dd></div>
-          <div>
-            <dt>Frequent-flyer membership</dt>
-            <dd>
-              <span className="badge badge-alliance">{STUDY.allianceName}</span> {STUDY.memberTier} member. Flights
-              on {STUDY.allianceName} airlines earn you miles and status credits.
-            </dd>
-          </div>
-        </dl>
+        <h2>{STUDY.rewards.name}</h2>
+        <p>
+          Your company runs a travel rewards scheme, <strong>{STUDY.rewards.name}</strong>. When you book a flight
+          on a partner airline, you earn points that you can redeem for {STUDY.rewards.redeem}. Partner airlines are
+          marked on each flight.
+        </p>
       </div>
 
       <div className="profile-card">
         <h2>Company travel policy</h2>
         <ul className="ticks">
           <li>Each trip has a <strong>fare cap</strong>. You may book above it, but you must give a reason.</li>
-          <li>You have an <strong>add-on allowance of {money(STUDY.addonAllowance)}</strong> per trip for extras such as lounge access or insurance. It cannot be carried over.</li>
           <li>Every flight shown arrives in time for your meeting.</li>
         </ul>
       </div>

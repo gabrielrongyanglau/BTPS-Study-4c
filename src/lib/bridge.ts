@@ -35,15 +35,14 @@ export function flatten(data: SessionData): Record<string, string> {
       const k = `b4c_${b.pos}_`;
       out[k + 'trip'] = b.tripId;
       out[k + 'set'] = String(b.designSet);
-      out[k + 'ai'] = b.ai;
+      out[k + 'ai'] = b.aiShown ? '1' : '0';
       out[k + 'rec'] = b.recOptIdx == null ? '' : String(b.recOptIdx);
       out[k + 'choice'] = String(b.choiceOptIdx);
       out[k + 'code'] = b.choiceCode;
+      out[k + 'price'] = String(b.choicePrice);
       out[k + 'follow'] = b.followedAI == null ? '' : b.followedAI ? '1' : '0';
       out[k + 'over'] = b.overPolicy ? '1' : '0';
       out[k + 'just'] = b.justification.join('|');
-      out[k + 'addons'] = b.addons.join('|');
-      out[k + 'bleisure'] = b.bleisure ? '1' : '0';
       out[k + 'rt'] = String(b.rtMs);
     });
   return out;

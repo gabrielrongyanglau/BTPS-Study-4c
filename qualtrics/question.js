@@ -3,7 +3,7 @@
  * 1. In Survey Flow, BEFORE this block, add Embedded Data fields:
  *      b4c_json, b4c_version, b4c_seed, b4c_duration_s, b4c_check_attempts,
  *      and for n = 1..8: b4c_n_trip, b4c_n_set, b4c_n_ai, b4c_n_rec, b4c_n_choice, b4c_n_code,
- *      b4c_n_follow, b4c_n_over, b4c_n_just, b4c_n_addons, b4c_n_bleisure, b4c_n_rt
+ *      b4c_n_price, b4c_n_follow, b4c_n_over, b4c_n_just, b4c_n_rt
  * 2. Replace APP_ORIGIN with your Vercel URL (no trailing slash).
  * 3. Question HTML (Rich Content Editor > Source):
  *      <iframe id="b4c-frame" src="https://APP_HOST/?pid=${e://Field/ResponseID}"
